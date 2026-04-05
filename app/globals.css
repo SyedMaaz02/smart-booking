@@ -1,0 +1,40 @@
+@import "react-day-picker/dist/style.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Modern industrial: deep charcoal, gold #D4AF37, crisp light type */
+@layer base {
+  :root {
+    --background: 220 16% 8%;
+    --foreground: 0 0% 98%;
+    --card: 220 14% 11%;
+    --card-foreground: 0 0% 98%;
+    --popover: 220 14% 11%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 46 65% 52%;
+    --primary-foreground: 220 20% 8%;
+    --secondary: 220 12% 16%;
+    --secondary-foreground: 0 0% 96%;
+    --muted: 220 10% 18%;
+    --muted-foreground: 220 9% 60%;
+    --accent: 220 12% 14%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62% 45%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 220 10% 20%;
+    --input: 220 10% 20%;
+    --ring: 46 65% 52%;
+    --radius: 0.5rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
+}
