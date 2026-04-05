@@ -1,5 +1,4 @@
-import { createServerClient } from "@supabase/ssr";
-import type { User } from "@supabase/supabase-js";
+import { createServerClient, type SetAllCookies } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 
 export async function updateSession(request: NextRequest) {
@@ -17,7 +16,9 @@ export async function updateSession(request: NextRequest) {
     return supabaseResponse;
   }
 
-  let user: User | null = null;
+  let user: Awaited<
+    ReturnType<ReturnType<typeof createServerClient>["auth"]["getUser"]>
+  >["data"]["user"] = null;
 
   try {
     const supabase = createServerClient(url, key, {
@@ -25,7 +26,7 @@ export async function updateSession(request: NextRequest) {
         getAll() {
           return request.cookies.getAll();
         },
-        setAll(cookiesToSet) {
+        setAll(cookiesToSet: Parameters<SetAllCookies>[0]) {
           cookiesToSet.forEach(({ name, value }) => request.cookies.set(name, value));
           supabaseResponse = NextResponse.next({ request });
           cookiesToSet.forEach(({ name, value, options }) =>
